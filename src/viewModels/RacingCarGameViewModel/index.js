@@ -5,6 +5,11 @@ export default class RacingCarGameViewModel {
   constructor() {
     this._roundCount = 0;
     this._cars = [];
+    this.subscribers = [];
+  }
+
+  registerView(view) {
+    this.subscribers.push(this);
   }
 
   setCarInstances(carNames) {
