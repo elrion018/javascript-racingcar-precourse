@@ -2,4 +2,8 @@ function getRandomNumber(maxNumber, minNumber) {
   return Math.random() * (maxNumber - minNumber) + min;
 }
 
-export { getRandomNumber };
+function splitCarNames(carNames) {
+  return carNames.split(',');
+}
+
+export { getRandomNumber, splitCarNames };

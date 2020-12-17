@@ -1,7 +1,8 @@
 import { getRandomNumber } from '../../utils';
 
 export default class Car {
-  constructor() {
+  constructor(carName) {
+    this._carName = carName;
     this._distances = 0;
     this.MAX_NUMBER = 10;
     this.MIN_NUMBER = 0;
