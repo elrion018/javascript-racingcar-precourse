@@ -2,6 +2,7 @@ import { RacingCarGameViewDelegator } from '../../eventDelegators';
 
 import { addTemplateIntoDOMInnerHTML } from '../../utils';
 
+import { message } from '../../constants';
 export default class RacingCarGameView {
   constructor(viewModel) {
     this.viewModel = viewModel;
@@ -15,6 +16,7 @@ export default class RacingCarGameView {
   renderResult() {
     this.renderIntermediateResultContainer();
     this.renderIntermediateResults(this.viewModel.getIntermediateResults());
+    this.renderWinners();
   }
 
   renderIntermediateResultContainer() {
@@ -48,5 +50,20 @@ export default class RacingCarGameView {
     );
   }
 
-  renderWinners() {}
+  renderWinners() {
+    addTemplateIntoDOMInnerHTML(
+      this.gameContainer.querySelector('#racing-result-container'),
+      `
+      <div>
+        <p>${message.winners}: ${this.viewModel
+        .getWinners()
+        .map(winner => {
+          return `${winner._carName}`;
+        })
+        .join(', ')}
+        </p>
+      </div>
+    `,
+    );
+  }
 }

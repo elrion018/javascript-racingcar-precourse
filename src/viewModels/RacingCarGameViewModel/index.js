@@ -9,7 +9,6 @@ export default class RacingCarGameViewModel {
   }
 
   getIntermediateResults() {
-    console.log(this._intermediateResults);
     return [...this._intermediateResults];
   }
 
@@ -17,8 +16,6 @@ export default class RacingCarGameViewModel {
     this._cars = splitCarNames(carNames).map(carName => {
       return new Car(carName);
     });
-
-    console.log(this._cars);
   }
 
   setRoundCount(roundCount) {
