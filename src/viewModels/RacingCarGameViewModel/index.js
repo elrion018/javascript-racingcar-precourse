@@ -5,17 +5,12 @@ export default class RacingCarGameViewModel {
   constructor() {
     this._roundCount = 0;
     this._cars = [];
-    this.subscribers = [];
+    this._intermediateResults = [];
   }
 
-  registerView(view) {
-    this.subscribers.push(view);
-  }
-
-  getCarDistances() {
-    return this._cars.map(car => {
-      return [car._carName, car._distances];
-    });
+  getIntermediateResults() {
+    console.log(this._intermediateResults);
+    return [...this._intermediateResults];
   }
 
   setCarInstances(carNames) {
@@ -27,15 +22,15 @@ export default class RacingCarGameViewModel {
   }
 
   setRoundCount(roundCount) {
-    this._roundCount = roundCount;
-
+    this._roundCount = roundCount.value;
     while (this._roundCount) {
       this.letCarsGoForward();
 
-      this.subscribers.forEach(subscribe => {
-        subscribe.updateChangedDistances();
+      let intermediateResult = this._cars.map(car => {
+        return [car._carName, car._distances];
       });
 
+      this._intermediateResults.push(intermediateResult);
       this._roundCount--;
     }
   }

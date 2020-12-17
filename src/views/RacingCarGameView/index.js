@@ -1,20 +1,52 @@
 import { RacingCarGameViewDelegator } from '../../eventDelegators';
 
+import { addTemplateIntoDOMInnerHTML } from '../../utils';
+
 export default class RacingCarGameView {
   constructor(viewModel) {
     this.viewModel = viewModel;
+    this.gameContainer = document.querySelector('#car-game-container');
+    this.eventDelegator = new RacingCarGameViewDelegator(this.viewModel);
 
-    const eventDelegator = new RacingCarGameViewDelegator(this.viewModel);
-
-    eventDelegator.bindView(this);
-    eventDelegator.bindEvent(document.querySelector('.car-game-container'));
+    this.eventDelegator.bindView(this);
+    this.eventDelegator.bindEvent(this.gameContainer);
   }
 
-  subscribeViewModel() {
-    this.viewModel.registerView(this);
+  renderResult() {
+    this.renderIntermediateResultContainer();
+    this.renderIntermediateResults(this.viewModel.getIntermediateResults());
   }
 
-  updateChangedDistances() {
-    this.viewModel.getCarDistances();
+  renderIntermediateResultContainer() {
+    addTemplateIntoDOMInnerHTML(
+      this.gameContainer.querySelector('#racing-result-container'),
+      `<div id="racing-intermediate-result-container"></div>`,
+    );
   }
+
+  renderIntermediateResults(intermediateResults) {
+    intermediateResults.forEach(intermediateResult => {
+      this.renderIntermediateResult(intermediateResult);
+    });
+  }
+
+  renderIntermediateResult(intermediateResult) {
+    addTemplateIntoDOMInnerHTML(
+      this.gameContainer.querySelector('#racing-intermediate-result-container'),
+      `
+      <div>
+        ${intermediateResult
+          .map(car => {
+            let [carName, distance] = car;
+            return `
+            <p>${carName}: ${'-'.repeat(distance)}</p>
+          `;
+          })
+          .join('')}
+      </div>
+      `,
+    );
+  }
+
+  renderWinners() {}
 }

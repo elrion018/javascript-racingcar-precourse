@@ -31,5 +31,6 @@ export default class RacingCarGameViewDelegator {
   addRoundCount() {
     console.log('addRoundCount');
     this.viewModel.setRoundCount(this.element.querySelector('#racing-count-input'));
+    this.view.renderResult();
   }
 }

@@ -14,4 +14,9 @@ function sortedByDistance(cars) {
   return cars;
 }
 
-export { getRandomNumber, splitCarNames, sortedByDistance };
+function addTemplateIntoDOMInnerHTML(DOM, template) {
+  console.log('call');
+  DOM.innerHTML += template;
+}
+
+export { getRandomNumber, splitCarNames, sortedByDistance, addTemplateIntoDOMInnerHTML };
