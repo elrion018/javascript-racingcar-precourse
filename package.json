@@ -6,6 +6,20 @@
   "directories": {
     "doc": "docs"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elrion018/javascript-racingcar-precourse.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elrion018/javascript-racingcar-precourse/issues"
+  },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
@@ -24,19 +38,6 @@
     "core-js": "^3.7.0",
     "eventsource-polyfill": "^0.9.6",
     "regenerator-runtime": "^0.13.7"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elrion018/javascript-racingcar-precourse.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/elrion018/javascript-racingcar-precourse/issues"
   },
   "homepage": "https://github.com/elrion018/javascript-racingcar-precourse#readme"
 }

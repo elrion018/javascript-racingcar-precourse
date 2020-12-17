@@ -22,6 +22,8 @@ export default class RacingCarGameViewModel {
     this._cars = splitCarNames(carNames).map(carName => {
       return new Car(carName);
     });
+
+    console.log(this._cars);
   }
 
   setRoundCount(roundCount) {

@@ -1,5 +1,6 @@
 export default class RacingCarGameViewDelegator {
-  constructor() {
+  constructor(viewModel) {
+    this.viewModel = viewModel;
     this.view = null;
     this.element = null;
   }
@@ -20,5 +21,15 @@ export default class RacingCarGameViewDelegator {
     if (dataset.purpose) {
       this[dataset.purpose]();
     }
+  }
+
+  addCarNames() {
+    console.log('addCarNames');
+    this.viewModel.setCarInstances(this.element.querySelector('#car-names-input').value);
+  }
+
+  addRoundCount() {
+    console.log('addRoundCount');
+    this.viewModel.setRoundCount(this.element.querySelector('#racing-count-input'));
   }
 }

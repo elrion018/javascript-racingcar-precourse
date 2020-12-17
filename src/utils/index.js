@@ -1,5 +1,5 @@
 function getRandomNumber(maxNumber, minNumber) {
-  return Math.random() * (maxNumber - minNumber) + min;
+  return Math.random() * (maxNumber - minNumber) + minNumber;
 }
 
 function splitCarNames(carNames) {
