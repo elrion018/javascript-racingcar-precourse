@@ -6,4 +6,8 @@ export default class RacingCarGameView {
   subscribeViewModel() {
     this.viewModel.registerView(this);
   }
+
+  updateChangedDistances() {
+    this.viewModel.getCarDistances();
+  }
 }

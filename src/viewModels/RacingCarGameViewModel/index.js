@@ -9,7 +9,13 @@ export default class RacingCarGameViewModel {
   }
 
   registerView(view) {
-    this.subscribers.push(this);
+    this.subscribers.push(view);
+  }
+
+  getCarDistances() {
+    return this._cars.map(car => {
+      return [car._carName, car._distances];
+    });
   }
 
   setCarInstances(carNames) {
@@ -23,6 +29,11 @@ export default class RacingCarGameViewModel {
 
     while (this._roundCount) {
       this.letCarsGoForward();
+
+      this.subscribers.forEach(subscribe => {
+        subscribe.updateChangedDistances();
+      });
+
       this._roundCount--;
     }
   }
