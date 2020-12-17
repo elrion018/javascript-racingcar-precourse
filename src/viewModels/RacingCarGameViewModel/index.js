@@ -12,4 +12,19 @@ export default class RacingCarGameViewModel {
       return new Car(carName);
     });
   }
+
+  setRoundCount(roundCount) {
+    this._roundCount = roundCount;
+
+    while (this._roundCount) {
+      this.letCarsGoForward();
+      this._roundCount--;
+    }
+  }
+
+  letCarsGoForward() {
+    this._cars.forEach(car => {
+      car.goForWard();
+    });
+  }
 }
