@@ -1,11 +1,14 @@
 import { splitCarNames, sortedByDistance } from '../../utils';
 import { Car } from '../../models';
+import { message } from '../../constants';
 
 export default class RacingCarGameViewModel {
   constructor() {
     this._roundCount = 0;
     this._cars = [];
     this._intermediateResults = [];
+
+    this.MAX_LENGTH = 5;
   }
 
   getIntermediateResults() {
@@ -13,7 +16,16 @@ export default class RacingCarGameViewModel {
   }
 
   setCarInstances(carNames) {
-    this._cars = splitCarNames(carNames).map(carName => {
+    const splitedCarNames = splitCarNames(carNames);
+
+    const errorMessage = this.validCarNames(splitedCarNames);
+
+    if (errorMessage) {
+      alert(errorMessage);
+      return;
+    }
+
+    this._cars = splitedCarNames.map(carName => {
       return new Car(carName);
     });
   }
@@ -45,5 +57,51 @@ export default class RacingCarGameViewModel {
     return sortedCars.filter(car => {
       return car._distances === winnerDistance;
     });
+  }
+
+  validCarNames(carNames) {
+    if (this.nameIsBlank(carNames)) {
+      return message.nameIsBlank;
+    }
+
+    if (this.nameIsLongerThan(carNames, this.MAX_LENGTH)) {
+      return message.isfiveLength;
+    }
+
+    if (this.nameIsOverLaped(carNames)) {
+      return message.isOverLaped;
+    }
+  }
+
+  nameIsBlank(carNames) {
+    if (carNames[0] === '') {
+      return true;
+    }
+
+    for (let i = 0; i < carNames.length; i++) {
+      if (carNames[i].trim() === '') {
+        return true;
+      }
+    }
+  }
+
+  nameIsLongerThan(carNames, maxLength) {
+    for (let i = 0; i < carNames.length; i++) {
+      if (carNames[i].length > maxLength) {
+        return true;
+      }
+    }
+  }
+
+  nameIsOverLaped(carNames) {
+    console.log(carNames);
+    const names = {};
+
+    for (let i = 0; i < carNames.length; i++) {
+      if (carNames[i] in names) {
+        return true;
+      }
+      names[carNames[i]] = true;
+    }
   }
 }
