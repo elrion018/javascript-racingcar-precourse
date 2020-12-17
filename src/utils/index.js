@@ -6,4 +6,12 @@ function splitCarNames(carNames) {
   return carNames.split(',');
 }
 
-export { getRandomNumber, splitCarNames };
+function sortedByDistance(cars) {
+  cars.sort((a, b) => {
+    return b._distances - a._distances;
+  });
+
+  return cars;
+}
+
+export { getRandomNumber, splitCarNames, sortedByDistance };
