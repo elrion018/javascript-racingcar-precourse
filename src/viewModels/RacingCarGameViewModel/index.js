@@ -28,10 +28,19 @@ export default class RacingCarGameViewModel {
     this._cars = splitedCarNames.map(carName => {
       return new Car(carName);
     });
+
+    return true;
   }
 
   setRoundCount(roundCount) {
     this._roundCount = roundCount.value;
+
+    const errorMessage = this.validRoundCount(this._roundCount);
+    if (errorMessage) {
+      alert(errorMessage);
+      return;
+    }
+
     while (this._roundCount) {
       this.letCarsGoForward();
 
@@ -42,6 +51,8 @@ export default class RacingCarGameViewModel {
       this._intermediateResults.push(intermediateResult);
       this._roundCount--;
     }
+
+    return true;
   }
 
   letCarsGoForward() {
@@ -73,6 +84,16 @@ export default class RacingCarGameViewModel {
     }
   }
 
+  validRoundCount(roundCount) {
+    if (!roundCount) {
+      return message.valueIsBlank;
+    }
+
+    if (isNaN(roundCount)) {
+      return message.valueIsNaN;
+    }
+  }
+
   nameIsBlank(carNames) {
     if (carNames[0] === '') {
       return true;
@@ -94,7 +115,6 @@ export default class RacingCarGameViewModel {
   }
 
   nameIsOverLaped(carNames) {
-    console.log(carNames);
     const names = {};
 
     for (let i = 0; i < carNames.length; i++) {

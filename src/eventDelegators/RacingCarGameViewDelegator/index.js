@@ -24,13 +24,13 @@ export default class RacingCarGameViewDelegator {
   }
 
   addCarNames() {
-    console.log('addCarNames');
     this.viewModel.setCarInstances(this.element.querySelector('#car-names-input').value);
   }
 
   addRoundCount() {
-    console.log('addRoundCount');
-    this.viewModel.setRoundCount(this.element.querySelector('#racing-count-input'));
-    this.view.renderResult();
+    const judge = this.viewModel.setRoundCount(this.element.querySelector('#racing-count-input'));
+    if (judge) {
+      this.view.renderResult();
+    }
   }
 }
